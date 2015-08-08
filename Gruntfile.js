@@ -1,11 +1,18 @@
 module.exports = function(grunt) {
 
-    grunt.loadNpmTasks('grunt-release');
-    grunt.loadNpmTasks('grunt-babel');
-    grunt.loadNpmTasks('grunt-contrib-copy');
+    // Load the plugins
+    [
+        'grunt-release',
+        'grunt-babel',
+        'grunt-contrib-copy',
+        'grunt-contrib-clean',
+        'grunt-karma'
+    ].forEach(grunt.loadNpmTasks);
 
     grunt.initConfig({
-
+        clean: {
+            dist:['dist']
+        },
         babel: {
             options: {
                 sourceMap: true
@@ -46,8 +53,14 @@ module.exports = function(grunt) {
                     { expand: true, flatten: true, src: 'src/*', dest: 'dist/' }
                 ]
             }
+        },
+        karma: {
+            unit: {
+                configFile: 'karma.conf.js'
+            }
         }
     });
 
-    grunt.registerTask('dist', ['copy:dist', 'babel:amd', 'babel:commonjs']);
+    grunt.registerTask('verify', ['karma']);
+    grunt.registerTask('dist', ['clean:dist', 'copy:dist', 'babel:amd', 'babel:commonjs']);
 };
