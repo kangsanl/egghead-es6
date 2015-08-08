@@ -63,4 +63,5 @@ module.exports = function(grunt) {
 
     grunt.registerTask('verify', ['karma']);
     grunt.registerTask('dist', ['clean:dist', 'copy:dist', 'babel:amd', 'babel:commonjs']);
+    grunt.registerTask('default', ['verify', 'dist']);
 };
