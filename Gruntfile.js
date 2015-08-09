@@ -11,7 +11,8 @@ module.exports = function(grunt) {
 
     grunt.initConfig({
         clean: {
-            dist:['dist']
+            dist:['dist/**/*.*'],
+            verify:['test-es5/**/*.*']
         },
         babel: {
             options: {
@@ -44,7 +45,21 @@ module.exports = function(grunt) {
                         ext: '.js'
                     }
                 ]
-            }
+            },
+            karma_amd: {
+                    options: {
+                        modules: 'amd'
+                    },
+                    files: [
+                        {
+                            expand: true,
+                            cwd: 'test',
+                            src: ['**/*.spec.js'],
+                            dest: 'test-es5/amd',
+                            ext: '.es5.spec.js'
+                        }
+                    ]
+                }
         },
 
         copy: {
@@ -61,7 +76,7 @@ module.exports = function(grunt) {
         }
     });
 
-    grunt.registerTask('verify', ['karma']);
+    grunt.registerTask('verify', ['clean:verify', 'karma', 'babel:karma_amd']);
     grunt.registerTask('dist', ['clean:dist', 'copy:dist', 'babel:amd', 'babel:commonjs']);
     grunt.registerTask('default', ['verify', 'dist']);
 };

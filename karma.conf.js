@@ -39,7 +39,13 @@ module.exports = function(config) {
     babelPreprocessor: {
           options: {
               modules: "amd"
-          }
+          },
+        filename: function (file) {
+            return file.originalPath.replace(/\.spec\.js$/, '.es5.spec.js');
+        },
+        sourceFileName: function (file) {
+            return file.originalPath;
+        }
     },
     // test results reporter to use
     // possible values: 'dots', 'progress'
