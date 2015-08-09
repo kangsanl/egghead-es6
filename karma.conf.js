@@ -8,14 +8,15 @@ module.exports = function(config) {
     basePath: '',
 
 
-    plugins: ['karma-jasmine','karma-requirejs','karma-phantomjs-launcher','karma-babel-preprocessor'],
+    plugins: ['karma-jasmine', 'karma-mocha','karma-requirejs','karma-chrome-launcher','karma-babel-preprocessor'],
     // frameworks to use
     // available frameworks: https://npmjs.org/browse/keyword/karma-adapter
-    frameworks: ['jasmine', 'requirejs' ],
+    frameworks: ['jasmine', 'mocha','requirejs' ],
 
 
     // list of files / patterns to load in the browser
     files: [
+      'node_modules/karma-babel-preprocessor/node_modules/babel-core/browser-polyfill.js',
       {pattern: 'src/**/*.js', included: false},
       {pattern: 'test/**/*.spec.js', included: false},
       'test/test-main.js'
@@ -65,7 +66,7 @@ module.exports = function(config) {
 
     // start these browsers
     // available browser launchers: https://npmjs.org/browse/keyword/karma-launcher
-    browsers: ['PhantomJS'],
+    browsers: ['Chrome'],
 
 
     // Continuous Integration mode
