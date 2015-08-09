@@ -7,3 +7,22 @@
  -- This will install needed plugins
  - $grunt
  -- This will run Karma Unit test, and transpile ES6 codes
+
+# File Structure
+.
+|-- dist : es5 src files
+|   |-- amd : transpiled to AMD
+|   |-- common : transpiled to commonjs
+|   '-- src : es6 source
+|
+|-- src : es6 source
+|
+|-- karma.conf.js : JS unit-test configuration
+|
+|-- test : JS unit-test
+|
+`-- test-es5 : transpiled es5(amd) src files
+
+# JS Unit Test
+- Chrome
+    -- PhantomJS(^1.x.x) is not optimized for applying Babel Transpiler yet
